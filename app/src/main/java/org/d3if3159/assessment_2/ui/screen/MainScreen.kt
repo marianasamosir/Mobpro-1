@@ -5,13 +5,18 @@ import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -34,6 +39,8 @@ import org.d3if3159.assessment_2.ui.theme.Assessment2Theme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -43,6 +50,19 @@ fun MainScreen() {
                     titleContentColor = Color(0xFF1B547C)
                 )
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    Toast.makeText(context, R.string.tambah_error, Toast.LENGTH_SHORT).show()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(id = R.string.tambah_musik),
+                    tint = Color(0xFF1B547C)
+                )
+            }
         }
     ) {padding ->
         ScreenContent(Modifier.padding(padding))
@@ -70,7 +90,8 @@ fun ScreenContent(modifier: Modifier) {
     }
     else {
         LazyColumn(
-            modifier = modifier.fillMaxSize()
+            modifier = modifier.fillMaxSize(),
+            contentPadding = PaddingValues(bottom = 84.dp)
         ) {
             items(dataMusik) {
                 ListItem(musik = it) {
