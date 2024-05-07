@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">MelodiIndo</string>
-    <string name="app_intro">Selamat datang di MelodiIndo. Silahkan buat daftar putar musik Indonesia terbaik anda.</string>
+    <string name="app_name">Marimelody</string>
+    <string name="app_intro">Selamat datang di MariMelody. Mari ciptakan daftar putar yang memikat dengan sentuhan harmoni dan emosi dari Melodi Marmar.</string>
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_musik">Tambah musik</string>
-    <string name="judul">Judul</string>
-    <string name="pencipta">Pencipta</string>
-    <string name="pop">Pop</string>
-    <string name="jazz">Jazz</string>
-    <string name="klasik">Klasik</string>
-    <string name="rock">Rock</string>
-    <string name="hiphop">Hip-Hop</string>
+    <string name="judul">Judul Lagu</string>
+    <string name="pencipta">Pencipta Lagu</string>
+    <string name="pop">Musik Pop</string>
+    <string name="jazz">Musik Jazz</string>
+    <string name="klasik">Musik Klasik</string>
+    <string name="rock">Musik Rock</string>
+    <string name="hiphop">Musik Hip-Hop</string>
     <string name="kembali">Kembali-Hop</string>
     <string name="simpan">Simpan</string>
     <string name="edit_musik">Ubah musik</string>

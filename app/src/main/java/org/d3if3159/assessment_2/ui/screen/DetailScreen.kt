@@ -49,9 +49,10 @@ const val KEY_ID_MUSIK = "idMusik"
 @Composable
 fun DetailScreen(navController: NavHostController, id: Long? = null) {
     val viewModel: DetailViewModel = viewModel()
+
     var judul by remember { mutableStateOf("") }
     var pencipta by remember { mutableStateOf("") }
-    var selectedGenre by remember { mutableStateOf("Pop") }
+    var selectedGenre by remember { mutableStateOf("Musik Pop") }
 
     if (id != null) {
         val dataMusik = viewModel.getMusik(id)
@@ -67,7 +68,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.kembali),
-                            tint = Color(0xFF1B547C)
+                            tint = Color(0xFFC3E4E8)
                         )
                     }
                 },
@@ -78,15 +79,15 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         Text(text = stringResource(id = R.string.edit_musik))
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color(0xFFE1AFF4),
-                    titleContentColor = Color(0xFF1B547C)
+                    containerColor = Color(0xFF3F8892),
+                    titleContentColor = Color(0xFFFFFFFF)
                 ),
                 actions = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = stringResource(id = R.string.simpan),
-                            tint = Color(0xFF1B547C)
+                            tint = Color(0xFFC3E4E8)
                         )
                     }
                 }
@@ -97,10 +98,13 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
         FormMusik(
             title = judul,
             onTitleChange = { judul = it},
+
             writer = pencipta,
             onWritChange = { pencipta = it },
+
             selectedGenre = selectedGenre,
             onGenChange = { selectedGenre = it },
+
             modifier = Modifier.padding(padding)
         )
     }
@@ -134,7 +138,7 @@ fun FormMusik(
         )
         OutlinedTextField(
             value = title,
-            onValueChange = { onTitleChange },
+            onValueChange = { onTitleChange(it) },
             label = { Text(text = stringResource(id = R.string.judul)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
@@ -145,7 +149,7 @@ fun FormMusik(
         )
         OutlinedTextField(
             value = writer,
-            onValueChange = { onWritChange },
+            onValueChange = { onWritChange(it) },
             label = { Text(text = stringResource(id = R.string.pencipta)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
