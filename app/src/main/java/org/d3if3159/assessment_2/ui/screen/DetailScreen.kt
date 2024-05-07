@@ -38,6 +38,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3159.assessment_2.R
@@ -47,10 +48,17 @@ const val KEY_ID_MUSIK = "idMusik"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, id: Long? = null) {
+    val viewModel: DetailViewModel = viewModel()
     var judul by remember { mutableStateOf("") }
     var pencipta by remember { mutableStateOf("") }
     var selectedGenre by remember { mutableStateOf("Pop") }
 
+    if (id != null) {
+        val dataMusik = viewModel.getMusik(id)
+        judul = dataMusik.judul
+        pencipta = dataMusik.pencipta
+        selectedGenre = dataMusik.genre
+    }
     Scaffold(
         topBar = {
             TopAppBar(
