@@ -4,7 +4,6 @@
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_musik">Tambah musik</string>
-    <string name="tambah_error">Belum bisa tambah musik.</string>
     <string name="judul">Judul</string>
     <string name="pencipta">Pencipta</string>
     <string name="pop">Pop</string>
@@ -12,4 +11,6 @@
     <string name="klasik">Klasik</string>
     <string name="rock">Rock</string>
     <string name="hiphop">Hip-Hop</string>
+    <string name="kembali">Kembali-Hop</string>
+    <string name="simpan">Simpan</string>
 </resources>

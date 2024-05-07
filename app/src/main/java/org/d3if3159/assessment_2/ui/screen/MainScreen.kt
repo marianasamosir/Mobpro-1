@@ -32,14 +32,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import org.d3if3159.assessment_2.R
 import org.d3if3159.assessment_2.model.Musik
+import org.d3if3159.assessment_2.navigation.Screen
 import org.d3if3159.assessment_2.ui.theme.Assessment2Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
-    val context = LocalContext.current
+fun MainScreen(navController: NavHostController) {
 
     Scaffold(
         topBar = {
@@ -54,7 +56,7 @@ fun MainScreen() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    Toast.makeText(context, R.string.tambah_error, Toast.LENGTH_SHORT).show()
+                    navController.navigate(Screen.FormBaru.route)
                 }
             ) {
                 Icon(
@@ -138,6 +140,6 @@ fun ListItem(musik: Musik, onClick: () -> Unit) {
 @Composable
 fun ScreenPreview() {
     Assessment2Theme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

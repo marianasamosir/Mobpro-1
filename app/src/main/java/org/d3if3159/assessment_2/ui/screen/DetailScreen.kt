@@ -11,7 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
@@ -33,12 +38,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import org.d3if3159.assessment_2.R
 import org.d3if3159.assessment_2.ui.theme.Assessment2Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen() {
+fun DetailScreen(navController: NavHostController) {
     var judul by remember { mutableStateOf("") }
     var pencipta by remember { mutableStateOf("") }
     var selectedGenre by remember { mutableStateOf("Pop") }
@@ -46,11 +53,29 @@ fun DetailScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.kembali),
+                            tint = Color(0xFF1B547C)
+                        )
+                    }
+                },
                 title = { Text(text = stringResource(id = R.string.tambah_musik)) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = Color(0xFFE1AFF4),
                     titleContentColor = Color(0xFF1B547C)
-                )
+                ),
+                actions = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Check,
+                            contentDescription = stringResource(id = R.string.simpan),
+                            tint = Color(0xFF1B547C)
+                        )
+                    }
+                }
             )
         },
 
@@ -162,6 +187,6 @@ fun GenreOption(label: String, isSelectedChange: Boolean, modifier: Modifier) {
 @Composable
 fun DetailScreenPreview() {
     Assessment2Theme {
-        DetailScreen()
+        DetailScreen(rememberNavController())
     }
 }
