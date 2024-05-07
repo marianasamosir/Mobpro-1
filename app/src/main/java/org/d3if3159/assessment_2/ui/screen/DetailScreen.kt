@@ -43,9 +43,10 @@ import androidx.navigation.compose.rememberNavController
 import org.d3if3159.assessment_2.R
 import org.d3if3159.assessment_2.ui.theme.Assessment2Theme
 
+const val KEY_ID_MUSIK = "idMusik"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(navController: NavHostController) {
+fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var judul by remember { mutableStateOf("") }
     var pencipta by remember { mutableStateOf("") }
     var selectedGenre by remember { mutableStateOf("Pop") }
@@ -62,7 +63,12 @@ fun DetailScreen(navController: NavHostController) {
                         )
                     }
                 },
-                title = { Text(text = stringResource(id = R.string.tambah_musik)) },
+                title = {
+                    if (id == null)
+                        Text(text = stringResource(id = R.string.tambah_musik))
+                    else
+                        Text(text = stringResource(id = R.string.edit_musik))
+                },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = Color(0xFFE1AFF4),
                     titleContentColor = Color(0xFF1B547C)
