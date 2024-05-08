@@ -26,10 +26,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,9 +43,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3159.assessment_2.R
+import org.d3if3159.assessment_2.database.MusikDb
 import org.d3if3159.assessment_2.model.Musik
 import org.d3if3159.assessment_2.navigation.Screen
 import org.d3if3159.assessment_2.ui.theme.Assessment2Theme
+import org.d3if3159.assessment_2.util.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,8 +85,11 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun ScreenContent(modifier: Modifier, navController: NavHostController) {
 
-    val viewModel: MainViewModel = viewModel()
-    val dataMusik = viewModel.dataMusik
+    val context = LocalContext.current
+    val db = MusikDb.getInstance(context)
+    val factory = ViewModelFactory(db.dao)
+    val viewModel: MainViewModel = viewModel(factory = factory)
+    val dataMusik by viewModel.dataMusik.collectAsState()
 
     if (dataMusik.isEmpty()) {
         Column(
@@ -122,7 +130,7 @@ fun ListItem(musik: Musik, onClick: () -> Unit) {
             contentDescription = "ini contoh",
             modifier = Modifier
                 .padding(16.dp)
-                .size(80.dp)
+                .size(90.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .fillMaxWidth()
         )
@@ -130,7 +138,7 @@ fun ListItem(musik: Musik, onClick: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 3.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             Text(
                 text = musik.judul,
@@ -148,6 +156,7 @@ fun ListItem(musik: Musik, onClick: () -> Unit) {
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
+            Text(text = musik.tanggal)
         }
     }
 

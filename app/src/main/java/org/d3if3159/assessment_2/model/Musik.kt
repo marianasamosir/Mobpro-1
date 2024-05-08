@@ -9,5 +9,6 @@ data class Musik(
     val id: Long = 0L,
     val judul: String,
     val pencipta: String,
-    val genre: String
+    val genre: String,
+    val tanggal: String
 )
