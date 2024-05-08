@@ -41,4 +41,10 @@ class DetailViewModel(private val dao: MusikDao) : ViewModel() {
             dao.update(musik)
         }
     }
+
+    fun delete(id: Long) {
+        viewModelScope.launch(Dispatchers.IO){
+            dao.deleteById(id)
+        }
+    }
 }

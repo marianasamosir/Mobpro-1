@@ -21,4 +21,7 @@ interface MusikDao {
 
     @Query("SELECT * FROM musik WHERE id = :id")
     suspend fun getMusikById(id: Long): Musik?
+
+    @Query("DELETE FROM musik WHERE id = :id")
+    suspend fun deleteById(id: Long)
 }
