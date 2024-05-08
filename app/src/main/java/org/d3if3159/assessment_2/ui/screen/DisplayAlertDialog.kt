@@ -2,6 +2,7 @@ package org.d3if3159.assessment_2.ui.screen
 
 import android.content.res.Configuration
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -21,13 +22,13 @@ fun DisplayAlertDialog(
         AlertDialog(
             text = { Text(
                 text = stringResource(R.string.pesan_hapus),
-                color = Color(0xFFFFFFFF)
+                color = Color(0xFF3F8892)
             ) },
             confirmButton = {
                 TextButton(onClick = { onConfirmation() }) {
                     Text(
                         text = stringResource(R.string.tombol_hapus),
-                        color = Color(0xFFFFFFFF)
+                        color = Color(0xFF3F8892)
                     )
                 }
             },
@@ -35,12 +36,12 @@ fun DisplayAlertDialog(
                 TextButton(onClick = { onDismissRequest() }) {
                     Text(
                         text = stringResource(R.string.tombol_batal),
-                        color = Color(0xFFFFFFFF)
+                        color = Color(0xFF3F8892)
                     )
                 }
             },
             onDismissRequest = { onDismissRequest() },
-            containerColor = Color(0xFF51A9B7)
+            containerColor = Color(0xFFC3E4E8)
         )
     }
 }
