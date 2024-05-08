@@ -16,6 +16,9 @@ interface MusikDao {
     @Update
     suspend fun update(musik: Musik)
 
-    @Query("SELECT * FROM musik ORDER BY tanggal DESC, judul ASC")
+    @Query("SELECT * FROM musik ORDER BY judul ASC, tanggal DESC")
     fun getMusik(): Flow<List<Musik>>
+
+    @Query("SELECT * FROM musik WHERE id = :id")
+    suspend fun getMusikById(id: Long): Musik?
 }

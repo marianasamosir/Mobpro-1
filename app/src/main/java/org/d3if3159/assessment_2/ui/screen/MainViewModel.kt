@@ -15,53 +15,6 @@ class MainViewModel(dao: MusikDao): ViewModel() {
         started = SharingStarted.WhileSubscribed(5000L),
         initialValue = emptyList()
     )
-
-//    private fun getDataDummy(): List<Musik> {
-//
-//        val dataMusik = mutableListOf<Musik>()
-//        val judulMusik = listOf(
-//            "Mengejar Impian",
-//            "Menciptakan Suasana",
-//            "Anugerah Terbaik",
-//            "Aku dan Dia",
-//            "Mengejar Impian",
-//            "Menciptakan Suasana",
-//            "Anugerah Terbaik",
-//            "Aku dan Dia"
-//        )
-//        val pencipta = listOf(
-//            "Evlogia Sihombing",
-//            "Yosi Priskiella",
-//            "Martahan Bennington",
-//            "Yonnathan Bryan",
-//            "Evlogia Sihombing",
-//            "Yosi Priskiella",
-//            "Martahan Bennington",
-//            "Yonnathan Bryan"
-//        )
-//        val genre = listOf(
-//            "Musik Pop",
-//            "Musik Rock",
-//            "Musik Jazz",
-//            "Musik Hip-Hop",
-//            "Musik Pop",
-//            "Musik Rock",
-//            "Musik Jazz",
-//            "Musik Hip-Hop"
-//        )
-//        for (i in 7 downTo 0) {
-//            dataMusik.add(
-//                Musik(
-//                    i.toLong(),
-//                    judulMusik[i],
-//                    pencipta[i],
-//                    genre[i],
-//                    "2024-05-$i 18:52:24 ",
-//                )
-//            )
-//        }
-//        return dataMusik
-//    }
 }
 
 

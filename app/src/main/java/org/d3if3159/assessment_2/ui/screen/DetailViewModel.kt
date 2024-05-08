@@ -25,13 +25,20 @@ class DetailViewModel(private val dao: MusikDao) : ViewModel() {
             dao.insert(musik)
         }
     }
-    fun getMusik(id: Long): Musik {
-        return Musik(
-            id,
-            "Mengejar Impian",
-            "Evlogia",
-            "Musik Jazz",
-            "2024-08-$id 19:29:21"
+    suspend fun getMusik(id: Long): Musik? {
+        return dao.getMusikById(id)
+    }
+
+    fun update(id: Long, judul: String, pencipta: String, genre: String) {
+        val musik = Musik(
+            id       = id,
+            tanggal  = formatter.format(Date()),
+            judul    = judul,
+            pencipta = pencipta,
+            genre    = genre
         )
+        viewModelScope.launch(Dispatchers.IO){
+            dao.update(musik)
+        }
     }
 }

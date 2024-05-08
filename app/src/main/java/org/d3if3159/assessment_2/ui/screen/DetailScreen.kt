@@ -14,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -63,8 +63,9 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var pencipta by remember { mutableStateOf("") }
     var selectedGenre by remember { mutableStateOf("Musik Pop") }
 
-    if (id != null) {
-        val dataMusik = viewModel.getMusik(id)
+    LaunchedEffect(true) {
+        if (id == null) return@LaunchedEffect
+        val dataMusik = viewModel.getMusik(id) ?: return@LaunchedEffect
         judul = dataMusik.judul
         pencipta = dataMusik.pencipta
         selectedGenre = dataMusik.genre
@@ -99,6 +100,9 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         }
                         if (id == null) {
                             viewModel.insert(judul, pencipta, selectedGenre)
+                        }
+                        else {
+                            viewModel.update(id,judul,pencipta,selectedGenre)
                         }
                         navController.popBackStack() })
                     {
