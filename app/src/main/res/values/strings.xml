@@ -14,4 +14,5 @@
     <string name="kembali">Kembali-Hop</string>
     <string name="simpan">Simpan</string>
     <string name="edit_musik">Ubah musik</string>
+    <string name="invalid">Judul lagu dan pencipta lagu tidak boleh kosong.</string>
 </resources>

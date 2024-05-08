@@ -1,6 +1,7 @@
 package org.d3if3159.assessment_2.ui.screen
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
@@ -42,13 +45,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3159.assessment_2.R
+import org.d3if3159.assessment_2.database.MusikDb
 import org.d3if3159.assessment_2.ui.theme.Assessment2Theme
+import org.d3if3159.assessment_2.util.ViewModelFactory
 
 const val KEY_ID_MUSIK = "idMusik"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, id: Long? = null) {
-    val viewModel: DetailViewModel = viewModel()
+    
+    val context = LocalContext.current
+    val db = MusikDb.getInstance(context)
+    val factory = ViewModelFactory(db.dao)
+    val viewModel: DetailViewModel = viewModel(factory = factory)
 
     var judul by remember { mutableStateOf("") }
     var pencipta by remember { mutableStateOf("") }
@@ -83,7 +92,16 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                     titleContentColor = Color(0xFFFFFFFF)
                 ),
                 actions = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = {
+                        if (judul == "" || pencipta == ""){
+                            Toast.makeText(context, R.string.invalid, Toast.LENGTH_LONG).show()
+                            return@IconButton
+                        }
+                        if (id == null) {
+                            viewModel.insert(judul, pencipta, selectedGenre)
+                        }
+                        navController.popBackStack() })
+                    {
                         Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = stringResource(id = R.string.simpan),
@@ -109,6 +127,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
         )
     }
 }
+
+
 
 @Composable
 fun FormMusik(
@@ -154,7 +174,7 @@ fun FormMusik(
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Words,
-                imeAction = ImeAction.Next
+                imeAction = ImeAction.Done
             ),
             modifier = Modifier.fillMaxWidth()
         )
