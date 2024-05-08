@@ -17,4 +17,7 @@
     <string name="invalid">Judul lagu dan pencipta lagu tidak boleh kosong.</string>
     <string name="lainnya">Opsi Lainnya</string>
     <string name="hapus">Hapus Musik</string>
+    <string name="pesan_hapus">Hapus musik ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
 </resources>

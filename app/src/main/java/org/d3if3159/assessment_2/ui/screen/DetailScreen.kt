@@ -66,6 +66,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var pencipta by remember { mutableStateOf("") }
     var selectedGenre by remember { mutableStateOf("Musik Pop") }
 
+    var showDialog by remember { mutableStateOf(false) }
+
     LaunchedEffect(true) {
         if (id == null) return@LaunchedEffect
         val dataMusik = viewModel.getMusik(id) ?: return@LaunchedEffect
@@ -116,7 +118,11 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         )
                     }
                     if (id != null) {
-                        DeleteAction {
+                        DeleteAction { showDialog = true }
+                        DisplayAlertDialog(
+                            openDialog = showDialog,
+                            onDismissRequest = { showDialog = false }) {
+                            showDialog = false
                             viewModel.delete(id)
                             navController.popBackStack()
                         }
