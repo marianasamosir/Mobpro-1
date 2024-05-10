@@ -132,7 +132,17 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(id = R.string.list_kosong))
+            Image(
+                painter = painterResource(id = R.drawable.headphone),
+                contentDescription = null,
+                modifier = Modifier.size(100.dp)
+            )
+
+            Text(
+                text = stringResource(id = R.string.list_kosong),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
     else {
@@ -236,13 +246,15 @@ fun GridItem(musik: Musik, onClick: () -> Unit) {
             )
             Text(
                 text = musik.judul,
-                maxLines = 2,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = musik.pencipta,
-                maxLines = 2
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
             Text(text = musik.genre)
             Text(text = musik.tanggal)

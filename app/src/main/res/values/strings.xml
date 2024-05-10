@@ -15,6 +15,7 @@
     <string name="simpan">Simpan</string>
     <string name="edit_musik">Ubah musik</string>
     <string name="invalid">Judul lagu dan pencipta lagu tidak boleh kosong.</string>
+    <string name="toas_simpan">Musik berasil disimpan.</string>
     <string name="lainnya">Opsi Lainnya</string>
     <string name="hapus">Hapus Musik</string>
     <string name="pesan_hapus">Hapus musik ini?</string>
